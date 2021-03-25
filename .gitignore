@@ -1,0 +1,11 @@
+# Dependency directory
+node_modules
+
+# Mac files
+.DS_Store
+
+# Build files
+.next
+
+# test coverage
+coverage
