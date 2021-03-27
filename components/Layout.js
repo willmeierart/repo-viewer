@@ -2,13 +2,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 // COMPONENTS
+import Header from "./Header/Header";
 
 export default function Layout({ children, isDarkTheme, toggleDarkTheme }) {
   return (
     <>
-      <header>
-        <nav />
-      </header>
+      <Header />
       <main>{children}</main>
     </>
   );

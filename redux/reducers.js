@@ -7,9 +7,11 @@ import { THEME_DARK } from "../lib/constants";
 export const initialDataState = {
   activeFilters: {},
   loading: true,
-  repositories: [],
-  searchPhrase: "willmeierart",
-  selectedRepository: {},
+  order: "",
+  orderBy: "",
+  repos: [],
+  searchPhrase: "author:willmeierart",
+  selectedRepo: {},
 };
 
 export const initialUiState = {
@@ -17,15 +19,21 @@ export const initialUiState = {
 };
 
 export const dataReducer = (state = initialDataState, action) => {
+  const newState = {
+    ...state,
+    ...action.payload,
+  };
   switch (action.type) {
     case types.FETCH_DETAIL:
       break;
     case types.FETCH_LIST:
-      break;
     case types.FILTER_LIST:
-      break;
+    case types.SEARCH_LIST:
     case types.SORT_LIST:
-      break;
+      return {
+        ...newState,
+        loading: false,
+      };
     case types.SET_LOADING:
       break;
     default:

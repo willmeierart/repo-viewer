@@ -1,5 +1,5 @@
 // PACKAGES
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 // UI
@@ -27,7 +27,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 /**
  * @Component
- * The Header component that contains the searchbar and filter drawer toggle
+ * The Header component that contains the searchbar, theme toggle, and filter drawer
  *
  */
 const Header = () => {
@@ -36,26 +36,28 @@ const Header = () => {
   const isHome = router.pathname === "/";
 
   return (
-    <Toolbar className={clsx(classes.root)}>
-      <Typography
-        aria-label="title"
-        className={classes.title}
-        component="div"
-        id="tableTitle"
-        variant="h6"
-      >
-        Transactions
-      </Typography>
-      <Tooltip>
-        <Switch />
-      </Tooltip>
-      {isHome && (
-        <>
-          <Searchbar />
-          <Filter />
-        </>
-      )}
-    </Toolbar>
+    <header>
+      <Toolbar className={clsx(classes.root)}>
+        <Typography
+          aria-label="title"
+          className={classes.title}
+          component="div"
+          id="tableTitle"
+          variant="h6"
+        >
+          Repo Reaper
+        </Typography>
+        <Tooltip>
+          <Switch />
+        </Tooltip>
+        {isHome && (
+          <>
+            <Searchbar />
+            <Filter />
+          </>
+        )}
+      </Toolbar>
+    </header>
   );
 };
 
