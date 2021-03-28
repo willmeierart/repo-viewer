@@ -39,7 +39,7 @@ const Header = () => {
     <header>
       <Toolbar className={classes.root}>
         <SafeLink className={classes.title} link url="/" variant="h4">
-          Repo Search
+          Repos
         </SafeLink>
         {isHome ? (
           <>

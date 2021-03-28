@@ -20,7 +20,7 @@ import { filterList } from "../../../redux/actions";
 // CONSTANTS
 import { FILTERS } from "../../../lib/constants";
 
-const useToolbarStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   drawer: {
     width: 250,
   },
@@ -40,7 +40,7 @@ const useToolbarStyles = makeStyles((theme) => ({
  *
  */
 const FilterDrawer = () => {
-  const classes = useToolbarStyles();
+  const classes = useStyles();
 
   const dispatch = useDispatch();
   const {

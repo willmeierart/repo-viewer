@@ -19,19 +19,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "100vw",
     maxWidth: "100%",
   },
-  large: {
-    height: theme.spacing(7),
-    width: theme.spacing(7),
-  },
   root: {
     "& > *": {
       margin: theme.spacing(1),
     },
     display: "flex",
-  },
-  small: {
-    height: theme.spacing(3),
-    width: theme.spacing(3),
   },
 }));
 

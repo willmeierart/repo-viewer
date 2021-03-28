@@ -51,7 +51,7 @@ const LinkContent = ({ children, link, url }) => {
 LinkContent.propTypes = {
   children: PropTypes.any,
   link: PropTypes.bool,
-  url: PropTypes.string,
+  url: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 /**

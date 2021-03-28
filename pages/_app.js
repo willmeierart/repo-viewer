@@ -1,5 +1,5 @@
 // PACKAGES
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
