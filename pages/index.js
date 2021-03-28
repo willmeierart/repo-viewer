@@ -31,6 +31,17 @@ export default function Home() {
       ) : (
         <ResultsTable />
       )}
+      <style jsx>
+        {`
+          .loading-wrapper {
+            align-items: center;
+            display: flex;
+            height: 60vh;
+            justify-content: center;
+            width: 100%;
+          }
+        `}
+      </style>
     </section>
   );
 }

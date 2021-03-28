@@ -9,9 +9,9 @@ import { fetchListWithQPs } from "../lib/helpers";
  * @param {bool} loadingState
  *
  */
-export const setLoading = (loadingState = true) => (dispatch) => {
+export const setLoading = (loading = true) => (dispatch) => {
   dispatch({
-    payload: loadingState,
+    payload: { loading },
     type: types.SET_LOADING,
   });
 };
@@ -28,7 +28,7 @@ const loadAndFetchData = async (dispatch, newState) => {
   // Immediately set loading state
   // Note that loading state set back to false in subsequent reducer code
   dispatch({
-    payload: true,
+    payload: { loading: true },
     type: types.SET_LOADING,
   });
 
