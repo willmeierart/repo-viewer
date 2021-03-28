@@ -13,7 +13,7 @@ import ResultsTable from "../components/Table/ResultsTable";
  * The homepage (list search) wrapper
  *
  */
-const Home = () => {
+export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const Home = () => {
   }, [dispatch]);
 
   const {
-    data: { loading },
+    ui: { loading },
   } = useSelector((state) => state);
 
   return (
     <section>
       {loading ? (
-        <div aria-lable="progress loader" className="loading-wrapper">
+        <div className="loading-wrapper">
           <CircularProgress />
         </div>
       ) : (
@@ -35,6 +35,4 @@ const Home = () => {
       )}
     </section>
   );
-};
-
-export default Home;
+}

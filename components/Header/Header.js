@@ -1,5 +1,6 @@
 // PACKAGES
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 // UI
@@ -45,7 +46,7 @@ const Header = () => {
           id="tableTitle"
           variant="h6"
         >
-          Repo Reaper
+          <Link href="/">Repo Reaper</Link>
         </Typography>
         <Tooltip>
           <Switch />

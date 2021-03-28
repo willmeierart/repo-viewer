@@ -10,6 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 // COMPONENTS
+import SafeLink from "../SafeLink";
 import SortableHead from "./SortableHead";
 // UTILS
 import { HEAD_CELLS } from "../../lib/constants";
@@ -47,7 +48,8 @@ const ResultsTable = () => {
     data: { repos },
   } = useSelector((state) => state);
 
-  if (!repos) return null;
+  if (!repos?.length)
+    return "No respositories found. Try to search for something else.";
 
   return (
     <Paper className={classes.paper}>
@@ -65,13 +67,15 @@ const ResultsTable = () => {
                 hover
                 key={`row-${i}`} // eslint-disable-line react/no-array-index-key
               >
-                {HEAD_CELLS.map(({ display }, j) => {
+                {HEAD_CELLS.map(({ display, link }, j) => {
                   const value = row[display];
                   // const display = getDisplayValue(value, column);
                   // const showTooltip = display && !column.includes("amount");
                   return (
                     <TableCell component="td" key={`cell${display + i + j}`}>
-                      {value}
+                      <SafeLink link={link} url={value}>
+                        {value}
+                      </SafeLink>
                     </TableCell>
                   );
                 })}
