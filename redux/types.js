@@ -7,4 +7,4 @@ export const SEARCH_LIST = "SEARCH_LIST";
 export const SET_LOADING = "SET_LOADING";
 
 // UI
-export const SET_THEME = "SET_THEME";
+export const TOGGLE_THEME = "TOGGLE_THEME";

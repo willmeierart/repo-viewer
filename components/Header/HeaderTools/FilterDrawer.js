@@ -12,9 +12,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
+// COMPONENTS
+import ThemeToggle from "../../ThemeToggle";
 // REDUX
 import { filterList } from "../../../redux/actions";
 // CONSTANTS
@@ -35,11 +36,11 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 /**
  * @Component
- * The drawer that contains filter options
+ * The drawer that contains filter options and theme toggle at desktop size
  * Only accessible via the homepage
  *
  */
-const Filter = () => {
+const FilterDrawer = () => {
   const classes = useToolbarStyles();
 
   const dispatch = useDispatch();
@@ -73,9 +74,7 @@ const Filter = () => {
         <div className={clsx(classes.drawer)} role="presentation">
           <List>
             <ListItem>
-              <Tooltip title="toggle theme">
-                <Switch />
-              </Tooltip>
+              <ThemeToggle />
             </ListItem>
             <Divider />
             <ListItem>
@@ -119,4 +118,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default FilterDrawer;

@@ -4,14 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 // UI
-import Switch from "@material-ui/core/Switch";
 import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 // COMPONENTS
-import Filter from "./HeaderTools/Filter";
+import Filter from "./HeaderTools/FilterDrawer";
 import Searchbar from "./HeaderTools/SearchBar";
+import ThemeToggle from "../ThemeToggle";
 
 const useToolbarStyles = makeStyles((theme) => ({
   drawer: {
@@ -55,9 +54,7 @@ const Header = () => {
             <Filter />
           </>
         ) : (
-          <Tooltip title="toggle theme">
-            <Switch />
-          </Tooltip>
+          <ThemeToggle />
         )}
       </Toolbar>
     </header>

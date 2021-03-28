@@ -1,8 +1,6 @@
 // REDUX
 import { combineReducers } from "redux";
 import * as types from "./types";
-// CONSTANTS
-import { THEME_DARK } from "../lib/constants";
 
 export const initialDataState = {
   filters: {},
@@ -15,7 +13,7 @@ export const initialDataState = {
 };
 
 export const initialUiState = {
-  theme: THEME_DARK,
+  darkTheme: false,
 };
 
 export const dataReducer = (state = initialDataState, action) => {
@@ -43,8 +41,11 @@ export const dataReducer = (state = initialDataState, action) => {
 
 export const uiReducer = (state = initialUiState, action) => {
   switch (action.type) {
-    case types.SET_THEME:
-      break;
+    case types.TOGGLE_THEME:
+      return {
+        ...state,
+        darkTheme: !state.darkTheme,
+      };
     default:
       return state;
   }

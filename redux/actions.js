@@ -85,7 +85,6 @@ export const searchList = (searchPhrase, prevState = {}) => async (
   dispatch
 ) => {
   const repos = await loadAndFetchData(dispatch, {
-    ...prevState,
     searchPhrase,
   });
 
@@ -115,4 +114,8 @@ export const sortList = (order, orderBy, prevState = {}) => async (
     payload: { order, orderBy, repos },
     type: types.SORT_LIST,
   });
+};
+
+export const toggleTheme = () => (dispatch) => {
+  dispatch({ type: types.TOGGLE_THEME });
 };

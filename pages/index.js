@@ -16,10 +16,7 @@ import ResultsTable from "../components/Table/ResultsTable";
 export default function Home() {
   const dispatch = useDispatch();
 
-  const {
-    data,
-    ui: { loading },
-  } = useSelector((state) => state);
+  const { data } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(fetchList(data));
@@ -27,7 +24,7 @@ export default function Home() {
 
   return (
     <section>
-      {loading ? (
+      {data.loading ? (
         <div className="loading-wrapper">
           <CircularProgress />
         </div>

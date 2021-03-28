@@ -5,11 +5,8 @@ import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 // UI
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
 // REDUX
 import { useStore } from "../redux/store";
-// UTILS
-import { themeDark, themeLight } from "../lib/theme";
 // COMPONENTS
 import Layout from "../components/Layout";
 
@@ -23,8 +20,6 @@ import Layout from "../components/Layout";
  */
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
-
-  const { isDarkTheme, setDarkTheme } = useState(true);
 
   useEffect(() => {
     // remove serverside css, prevent FOUC
@@ -61,11 +56,10 @@ export default function App({ Component, pageProps }) {
         <meta content="index,follow" name="robots" />
       </Head>
       <Provider store={store}>
-        <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
-          <Layout isDarkTheme={isDarkTheme} toggleDarkTheme={setDarkTheme}>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </>
   );

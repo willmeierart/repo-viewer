@@ -3,13 +3,19 @@ import React from "react";
 import PropTypes from "prop-types";
 // UI
 import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+// COMPONENTS
+import SafeLink from "../../components/SafeLink";
 // UTILS
-import { fetchDetail } from "../../lib/helpers";
+import { fetchDetail, prettyDate } from "../../lib/helpers";
 
 const useStyles = makeStyles((theme) => ({
+  image: {
+    border: "1px solid black",
+    borderRadius: "100vw",
+  },
   large: {
     height: theme.spacing(7),
     width: theme.spacing(7),
@@ -38,12 +44,46 @@ export default function Detail({ data }) {
   return (
     <section>
       <Paper>
-        <Typography variant="h1">{data.name}</Typography>
-        <Avatar
-          alt={data.ownerName}
-          className={classes.large}
-          src={data.ownerImg}
-        />
+        <Grid container spacing={3}>
+          <Grid item m={3} xs={12}>
+            <img
+              alt={data.ownerName}
+              className={classes.image}
+              src={data.ownerImg}
+            />
+          </Grid>
+          <Grid item m={9} xs={12}>
+            <Typography variant="h4">{data.ownerName}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h2">
+              <SafeLink link url={data.url}>
+                {data.name}
+              </SafeLink>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper>
+              <Typography variant="h6">{data.description}</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper>
+              <Typography>last updated: {prettyDate(data.updated)}</Typography>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Paper>
+              <Typography>language: {data.language}</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper>
+              <Typography>stars: {data.stars}</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Paper>
     </section>
   );
