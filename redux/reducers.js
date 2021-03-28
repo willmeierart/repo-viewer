@@ -5,12 +5,12 @@ import * as types from "./types";
 import { THEME_DARK } from "../lib/constants";
 
 export const initialDataState = {
-  activeFilters: {},
+  filters: {},
   loading: true,
   order: "",
   orderBy: "",
   repos: [],
-  searchPhrase: "author:willmeierart",
+  searchPhrase: "hotel engine",
   selectedRepo: {},
 };
 

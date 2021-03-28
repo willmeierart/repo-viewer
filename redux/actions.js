@@ -1,5 +1,3 @@
-// PACKAGES
-import debounce from "lodash.debounce";
 // REDUX
 import * as types from "./types";
 // UTILS
@@ -34,17 +32,15 @@ export const fetchList = () => (dispatch) => {
  * @function
  * Filter for individual repo matches based on filter select fields
  * @param {object} filter formatted as `{FIELD: VALUE}`
- * @param {object} filters prev state of `activeFilters`.
+ * @param {object} filters prev state of `filters`.
  *
  */
-export const filterList = (filter, prevFilters, prevState) => async (
-  dispatch
-) => {
+export const filterList = (filter, prevState) => async (dispatch) => {
   // Immediately set loading state
   // Note that loading state set back to false in reducer code
   setLoading();
 
-  const newFilters = { ...prevFilters, ...filter };
+  const newFilters = { ...prevState.filters, ...filter };
 
   // Clear filter if value reset to placeholder value
   const [fKey, fVal] = Object.entries(filter)[0];
@@ -58,8 +54,7 @@ export const filterList = (filter, prevFilters, prevState) => async (
   });
 
   dispatch({
-    payload: { activeFilters: newFilters },
-    repos,
+    payload: { filters: newFilters, repos },
     type: types.FILTER_LIST,
   });
 };
@@ -76,15 +71,10 @@ export const searchList = (searchPhrase, prevState) => async (dispatch) => {
   // Note that loading state set back to false in reducer code
   setLoading();
   const repos = await fetchListWithQueries({ ...prevState, searchPhrase });
-  // ...but debounce the actual searching a bit since `doSearch` is a heavy func
-  const debounceableSearch = () => {
-    dispatch({
-      payload: { repos, searchPhrase },
-      type: types.SEARCH_LIST,
-    });
-  };
-
-  debounce(debounceableSearch, 500)();
+  dispatch({
+    payload: { repos, searchPhrase },
+    type: types.SEARCH_LIST,
+  });
 };
 
 /**

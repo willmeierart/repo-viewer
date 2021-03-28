@@ -17,14 +17,18 @@ import { searchList } from "../../../redux/actions";
 const Searchbar = () => {
   const dispatch = useDispatch();
   const {
-    data: { searchPhrase },
+    data: { filters, order, orderBy, searchPhrase },
   } = useSelector((state) => state);
 
   const [phrase, setPhrase] = useState(searchPhrase);
 
-  const handleSearch = ({ target: { value } }) => {
-    setPhrase(value);
-    dispatch(searchList(value));
+  const handleSearch = ({ keyCode }) => {
+    // because of github api rate limiting it just isn't viable to
+    // fire off a search in the onChange handler, even debounced,
+    // so we'll just use the `ENTER` key to dispatch instead.
+    if (keyCode === 13) {
+      dispatch(searchList(phrase, { filters, order, orderBy, searchPhrase }));
+    }
   };
 
   return (
@@ -38,7 +42,10 @@ const Searchbar = () => {
       }}
       aria-label="searchbar"
       id="searchbar"
-      onChange={handleSearch}
+      onChange={({ target: { value } }) => {
+        setPhrase(value);
+      }}
+      onKeyDown={handleSearch}
       value={phrase}
       variant="outlined"
     />
