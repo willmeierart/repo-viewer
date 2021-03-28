@@ -2,9 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 const SafeLink = ({ url, link }) => {
-  if (!url) {
-    return null;
-  } else if (!link) {
+  if (!link) {
     return url;
   } else if (url.indexOf("http") === 0) {
     return (

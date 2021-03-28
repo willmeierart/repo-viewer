@@ -12,6 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 // REDUX
@@ -71,6 +72,12 @@ const Filter = () => {
       <Drawer anchor="right" onClose={toggleDrawer(false)} open={drawerOpen}>
         <div className={clsx(classes.drawer)} role="presentation">
           <List>
+            <ListItem>
+              <Tooltip title="toggle theme">
+                <Switch />
+              </Tooltip>
+            </ListItem>
+            <Divider />
             <ListItem>
               <ListItemText>Filter</ListItemText>
             </ListItem>

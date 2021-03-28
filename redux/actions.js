@@ -31,7 +31,7 @@ const loadAndFetchData = async (dispatch, newState) => {
     payload: true,
     type: types.SET_LOADING,
   });
-  console.log({ newState });
+
   return await fetchListWithQueries(newState);
 };
 
@@ -110,8 +110,6 @@ export const sortList = (order, orderBy, prevState = {}) => async (
     order,
     orderBy,
   });
-
-  console.log(order, orderBy, repos);
 
   dispatch({
     payload: { order, orderBy, repos },

@@ -48,14 +48,16 @@ const Header = () => {
         >
           <Link href="/">Repo Reaper</Link>
         </Typography>
-        <Tooltip>
-          <Switch />
-        </Tooltip>
-        {isHome && (
+
+        {isHome ? (
           <>
             <Searchbar />
             <Filter />
           </>
+        ) : (
+          <Tooltip title="toggle theme">
+            <Switch />
+          </Tooltip>
         )}
       </Toolbar>
     </header>
