@@ -20,14 +20,13 @@ import { HEAD_CELLS } from "../../lib/constants";
  */
 const SortableHead = ({ classes }) => {
   const dispatch = useDispatch();
-  const {
-    data: { order, orderBy },
-  } = useSelector((state) => state);
+  const { data } = useSelector((state) => state);
+  const { order, orderBy } = data;
 
   const handleSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     const newOrder = isAsc ? "desc" : "asc";
-    dispatch(sortList(newOrder, property));
+    dispatch(sortList(newOrder, property, data));
   };
 
   const onSort = (prop) => (e) => handleSort(prop);
@@ -37,7 +36,7 @@ const SortableHead = ({ classes }) => {
   return (
     <TableHead>
       <TableRow>
-        {HEAD_CELLS.map(({ apiKey, display }) => (
+        {HEAD_CELLS.map(({ apiKey, display, sortKey }) => (
           <TableCell
             align="left"
             aria-label={`table column ${orderBy} sorted by ${order}`}
@@ -45,13 +44,17 @@ const SortableHead = ({ classes }) => {
             padding="default"
             sortDirection={isOrderer(apiKey) ? order : false}
           >
-            <TableSortLabel
-              active={isOrderer(apiKey)}
-              direction={isOrderer(apiKey) ? order : "asc"}
-              onClick={onSort(apiKey)}
-            >
-              {display}
-            </TableSortLabel>
+            {sortKey ? (
+              <TableSortLabel
+                active={isOrderer(sortKey)}
+                direction={isOrderer(sortKey) ? order : "asc"}
+                onClick={onSort(sortKey)}
+              >
+                {display}
+              </TableSortLabel>
+            ) : (
+              display
+            )}
           </TableCell>
         ))}
       </TableRow>

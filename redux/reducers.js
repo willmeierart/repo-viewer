@@ -35,7 +35,7 @@ export const dataReducer = (state = initialDataState, action) => {
         loading: false,
       };
     case types.SET_LOADING:
-      break;
+      return newState;
     default:
       return state;
   }
@@ -45,7 +45,6 @@ export const uiReducer = (state = initialUiState, action) => {
   switch (action.type) {
     case types.SET_THEME:
       break;
-
     default:
       return state;
   }

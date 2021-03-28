@@ -16,13 +16,14 @@ import ResultsTable from "../components/Table/ResultsTable";
 export default function Home() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchList());
-  }, [dispatch]);
-
   const {
+    data,
     ui: { loading },
   } = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(fetchList(data));
+  }, [dispatch]);
 
   return (
     <section>

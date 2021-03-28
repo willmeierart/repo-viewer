@@ -18,14 +18,33 @@ export const setLoading = (loadingState = true) => (dispatch) => {
 
 /**
  * @function
- * Fetches initial list of repositories, fired on homepage render
+ * A sort of higher order action that is used by other actions
+ * to set `loading` state during asynchronous fetching
+ * @param {function} dispatch the redux dispatch callback
+ * @param {object} newState the state to process for composing queries
  *
  */
-export const fetchList = () => (dispatch) => {
+const loadAndFetchData = async (dispatch, newState) => {
   // Immediately set loading state
-  // Note that loading state set back to false in reducer code
-  setLoading();
-  dispatch({ payload: {}, type: types.FETCH_LIST });
+  // Note that loading state set back to false in subsequent reducer code
+  dispatch({
+    payload: true,
+    type: types.SET_LOADING,
+  });
+  console.log({ newState });
+  return await fetchListWithQueries(newState);
+};
+
+/**
+ * @function
+ * Fetches initial list of repositories, fired on homepage render
+ * @param initialState needed because `loadAndFetchData` relies on state arg
+ *
+ */
+export const fetchList = (initialState = {}) => async (dispatch) => {
+  const repos = await loadAndFetchData(dispatch, initialState);
+
+  dispatch({ payload: { repos }, type: types.FETCH_LIST });
 };
 
 /**
@@ -35,11 +54,7 @@ export const fetchList = () => (dispatch) => {
  * @param {object} filters prev state of `filters`.
  *
  */
-export const filterList = (filter, prevState) => async (dispatch) => {
-  // Immediately set loading state
-  // Note that loading state set back to false in reducer code
-  setLoading();
-
+export const filterList = (filter, prevState = {}) => async (dispatch) => {
   const newFilters = { ...prevState.filters, ...filter };
 
   // Clear filter if value reset to placeholder value
@@ -48,7 +63,7 @@ export const filterList = (filter, prevState) => async (dispatch) => {
     delete newFilters[fKey];
   }
 
-  const repos = await fetchListWithQueries({
+  const repos = await loadAndFetchData(dispatch, {
     ...prevState,
     filters: newFilters,
   });
@@ -66,11 +81,14 @@ export const filterList = (filter, prevState) => async (dispatch) => {
  * @param {string} searchPhrase the string to search for matches against
  *
  */
-export const searchList = (searchPhrase, prevState) => async (dispatch) => {
-  // Immediately set loading state
-  // Note that loading state set back to false in reducer code
-  setLoading();
-  const repos = await fetchListWithQueries({ ...prevState, searchPhrase });
+export const searchList = (searchPhrase, prevState = {}) => async (
+  dispatch
+) => {
+  const repos = await loadAndFetchData(dispatch, {
+    ...prevState,
+    searchPhrase,
+  });
+
   dispatch({
     payload: { repos, searchPhrase },
     type: types.SEARCH_LIST,
@@ -84,8 +102,17 @@ export const searchList = (searchPhrase, prevState) => async (dispatch) => {
  * @param {string} orderBy the name of the property to apply order param to
  *
  */
-export const sortList = (order, orderBy, prevState) => async (dispatch) => {
-  const repos = await fetchListWithQueries({ ...prevState, order, orderBy });
+export const sortList = (order, orderBy, prevState = {}) => async (
+  dispatch
+) => {
+  const repos = await loadAndFetchData(dispatch, {
+    ...prevState,
+    order,
+    orderBy,
+  });
+
+  console.log(order, orderBy, repos);
+
   dispatch({
     payload: { order, orderBy, repos },
     type: types.SORT_LIST,
