@@ -1,7 +1,7 @@
 // REDUX
 import * as types from "./types";
 // UTILS
-import { fetchListWithQueries } from "../lib/helpers";
+import { fetchListWithQPs } from "../lib/helpers";
 
 /**
  * @function
@@ -32,7 +32,7 @@ const loadAndFetchData = async (dispatch, newState) => {
     type: types.SET_LOADING,
   });
 
-  return await fetchListWithQueries(newState);
+  return await fetchListWithQPs(newState);
 };
 
 /**
@@ -116,6 +116,11 @@ export const sortList = (order, orderBy, prevState = {}) => async (
   });
 };
 
+/**
+ * @function
+ * Toggle between light and dark theme
+ *
+ */
 export const toggleTheme = () => (dispatch) => {
   dispatch({ type: types.TOGGLE_THEME });
 };

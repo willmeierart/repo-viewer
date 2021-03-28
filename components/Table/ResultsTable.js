@@ -69,8 +69,6 @@ const ResultsTable = () => {
               >
                 {HEAD_CELLS.map(({ display, link }, j) => {
                   const value = row[display];
-                  // const display = getDisplayValue(value, column);
-                  // const showTooltip = display && !column.includes("amount");
                   return (
                     <TableCell component="td" key={`cell${display + i + j}`}>
                       <SafeLink link={link} url={value}>

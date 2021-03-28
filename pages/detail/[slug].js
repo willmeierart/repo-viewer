@@ -1,6 +1,7 @@
 // PACKAGES
 import React from "react";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 // UI
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -40,6 +41,15 @@ const useStyles = makeStyles((theme) => ({
  */
 export default function Detail({ data }) {
   const classes = useStyles();
+  const router = useRouter();
+
+  // if for some reason the initialProps fetch fails,
+  // (i.e. there is a malformed url slug),
+  // reroute to homepage and safely return null
+  if (!data?.name) {
+    router.push("/");
+    return null;
+  }
 
   return (
     <section>
@@ -90,11 +100,10 @@ export default function Detail({ data }) {
 }
 
 Detail.getInitialProps = async (ctx) => {
-  // url decode
   try {
+    // fetch repo data based on url path slug
     const path = decodeURIComponent(ctx.query.slug);
     const data = await fetchDetail(path);
-    console.log("aaa", data);
     return { data };
   } catch (e) {
     return {};
@@ -102,5 +111,5 @@ Detail.getInitialProps = async (ctx) => {
 };
 
 Detail.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
 };

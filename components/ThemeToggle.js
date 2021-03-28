@@ -8,6 +8,11 @@ import Brightness5Icon from "@material-ui/icons/Brightness5";
 // REDUX
 import { toggleTheme } from "../redux/actions";
 
+/**
+ * @Component
+ * Toggle for theme. Appears in toolbar of home page and header of detail page.
+ *
+ */
 const ThemeToggle = () => {
   const dispatch = useDispatch();
   const {

@@ -10,6 +10,12 @@ import Header from "./Header/Header";
 // UTILS
 import { themeDark, themeLight } from "../lib/theme";
 
+/**
+ * @Component
+ * Layout component, as per next.js convention.
+ * Persists route changes and allows for theming from within redux context provider
+ *
+ */
 export default function Layout({ children }) {
   const {
     ui: { darkTheme },

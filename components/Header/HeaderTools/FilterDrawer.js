@@ -1,7 +1,6 @@
 // PACKAGES
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Divider from "@material-ui/core/Divider";
@@ -50,6 +49,10 @@ const FilterDrawer = () => {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  const toggleDrawer = (open) => (e) => {
+    setDrawerOpen(open);
+  };
+
   const handleFilter = (filterKey) => ({ target: { value } }) => {
     dispatch(
       filterList(
@@ -57,10 +60,6 @@ const FilterDrawer = () => {
         { filters, order, orderBy, searchPhrase }
       )
     );
-  };
-
-  const toggleDrawer = (open) => (e) => {
-    setDrawerOpen(open);
   };
 
   return (
@@ -71,7 +70,7 @@ const FilterDrawer = () => {
         </IconButton>
       </Tooltip>
       <Drawer anchor="right" onClose={toggleDrawer(false)} open={drawerOpen}>
-        <div className={clsx(classes.drawer)} role="presentation">
+        <div className={classes.drawer} role="presentation">
           <List>
             <ListItem>
               <ThemeToggle />

@@ -6,10 +6,6 @@ import thunkMiddleware from "redux-thunk";
 // REDUX
 import reducers from "./reducers";
 
-/**
- * redux boilerplate
- */
-
 let store;
 
 function initStore(initialState) {

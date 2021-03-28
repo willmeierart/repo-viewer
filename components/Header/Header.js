@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import clsx from "clsx";
 // UI
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -17,6 +16,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     width: 250,
   },
   root: {
+    // background: theme.palette.primary.light,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
   },
@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header>
-      <Toolbar className={clsx(classes.root)}>
+      <Toolbar className={classes.root}>
         <Typography
           aria-label="title"
           className={classes.title}
