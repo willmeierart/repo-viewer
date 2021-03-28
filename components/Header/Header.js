@@ -1,15 +1,14 @@
 // PACKAGES
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 // UI
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 // COMPONENTS
 import Filter from "./HeaderTools/FilterDrawer";
 import Searchbar from "./HeaderTools/SearchBar";
 import ThemeToggle from "../ThemeToggle";
+import SafeLink from "../SafeLink";
 
 const useToolbarStyles = makeStyles((theme) => ({
   drawer: {
@@ -21,6 +20,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
   },
   title: {
+    color: theme.palette.light,
     flex: "1 1 100%",
   },
 }));
@@ -38,16 +38,9 @@ const Header = () => {
   return (
     <header>
       <Toolbar className={classes.root}>
-        <Typography
-          aria-label="title"
-          className={classes.title}
-          component="div"
-          id="tableTitle"
-          variant="h6"
-        >
-          <Link href="/">Repo Reaper</Link>
-        </Typography>
-
+        <SafeLink className={classes.title} link url="/" variant="h4">
+          Repo Search
+        </SafeLink>
         {isHome ? (
           <>
             <Searchbar />

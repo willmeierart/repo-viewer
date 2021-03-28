@@ -14,8 +14,10 @@ import { fetchDetail, prettyDate } from "../../lib/helpers";
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    border: "1px solid black",
+    background: "white",
+    border: `1px solid ${theme.palette.primary.light}`,
     borderRadius: "100vw",
+    maxWidth: "100%",
   },
   large: {
     height: theme.spacing(7),
@@ -53,7 +55,7 @@ export default function Detail({ data }) {
 
   return (
     <section>
-      <Paper>
+      <Paper className={classes.root}>
         <Grid container spacing={3}>
           <Grid item m={3} xs={12}>
             <img
@@ -62,36 +64,28 @@ export default function Detail({ data }) {
               src={data.ownerImg}
             />
           </Grid>
-          <Grid item m={9} xs={12}>
-            <Typography variant="h4">{data.ownerName}</Typography>
-          </Grid>
           <Grid item xs={12}>
-            <Typography variant="h2">
+            <Typography variant="h4">
               <SafeLink link url={data.url}>
                 {data.name}
               </SafeLink>
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Paper>
-              <Typography variant="h6">{data.description}</Typography>
-            </Paper>
+            <Typography variant="h6">{data.description}</Typography>
+          </Grid>
+          <Grid item s={6} xs={12}>
+            <Typography>last updated: {prettyDate(data.updated)}</Typography>
+          </Grid>
+          <Grid item s={6} xs={12}>
+            <Typography>
+              <SafeLink link url={data.url}>
+                language: {data.language}
+              </SafeLink>
+            </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Paper>
-              <Typography>last updated: {prettyDate(data.updated)}</Typography>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Paper>
-              <Typography>language: {data.language}</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper>
-              <Typography>stars: {data.stars}</Typography>
-            </Paper>
+            <Typography>stars: {data.stars}</Typography>
           </Grid>
         </Grid>
       </Paper>

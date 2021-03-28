@@ -3,7 +3,18 @@ import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 // UI
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+
+const useStyles = makeStyles((theme) => ({
+  type: {
+    "&:hover": {
+      fontWeight: "bold",
+    },
+    color: theme.palette.primary.contrastText,
+    textDecoration: "none",
+  },
+}));
 
 /**
  * @Component
@@ -14,21 +25,26 @@ import Typography from "@material-ui/core/Typography";
  *
  */
 const LinkContent = ({ children, link, url }) => {
+  const classes = useStyles();
   const innerHtml = children || url;
   if (!link) {
     // just regular text content
-    return innerHtml;
+    return <span>{innerHtml}</span>;
   } else if (url.indexOf("http") === 0) {
     // external link in new tab
     return (
-      <a href={url} rel="noreferrer" target="_blank">
+      <a className={classes.type} href={url} rel="noreferrer" target="_blank">
         {innerHtml}
       </a>
     );
   } else {
     // Internal app link
     // I acknowledge this is brittle currently...
-    return <Link href={`/detail/${encodeURIComponent(url)}`}>{innerHtml}</Link>;
+    return (
+      <Link href={`/detail/${encodeURIComponent(url)}`} passHref>
+        <a className={classes.type}>{innerHtml}</a>
+      </Link>
+    );
   }
 };
 
@@ -40,21 +56,13 @@ LinkContent.propTypes = {
 
 /**
  * @Component
- * Styled wrapper for `LinkContent`
+ * Wrapper for `LinkContent`
  * @param {object} props same as above
  *
  */
 const SafeLink = (props) => (
-  <Typography color="primary">
+  <Typography {...props}>
     <LinkContent {...props} />
-    <style global jsx>
-      {`
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-      `}
-    </style>
   </Typography>
 );
 
