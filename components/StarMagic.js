@@ -17,8 +17,6 @@ const StarMagic = ({ stars }) => {
     }, 50);
   }, [wrapper.current]);
 
-  console.log(stars);
-
   return (
     <div className="particles-wrapper" ref={wrapper}>
       <Particles

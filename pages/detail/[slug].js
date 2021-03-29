@@ -43,7 +43,7 @@ export default function Detail({ data }) {
   // (i.e. there is a malformed url slug),
   // reroute to homepage and safely return null
   if (!data?.name) {
-    router.push("/");
+    router.replace("/");
     return null;
   }
 
