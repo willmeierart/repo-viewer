@@ -60,10 +60,14 @@ LinkContent.propTypes = {
  * @param {object} props same as above
  *
  */
-const SafeLink = (props) => (
-  <Typography {...props}>
-    <LinkContent {...props} />
+const SafeLink = ({ link, ...props }) => (
+  <Typography element="div" {...props}>
+    <LinkContent link={link} {...props} />
   </Typography>
 );
+
+SafeLink.propTypes = {
+  link: PropTypes.bool,
+};
 
 export default SafeLink;

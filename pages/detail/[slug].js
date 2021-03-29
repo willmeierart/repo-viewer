@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 // COMPONENTS
 import SafeLink from "../../components/SafeLink";
+import StarMagic from "../../components/StarMagic";
 // UTILS
 import { fetchDetail, prettyDate } from "../../lib/helpers";
 
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     display: "flex",
+    minHeight: "33vh",
   },
 }));
 
@@ -57,11 +59,9 @@ export default function Detail({ data }) {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h4">
-              <SafeLink link url={data.url}>
-                {data.name}
-              </SafeLink>
-            </Typography>
+            <SafeLink link url={data.url} variant="h4">
+              {data.name}
+            </SafeLink>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">{data.description}</Typography>
@@ -70,17 +70,16 @@ export default function Detail({ data }) {
             <Typography>last updated: {prettyDate(data.updated)}</Typography>
           </Grid>
           <Grid item s={6} xs={12}>
-            <Typography>
-              <SafeLink link url={data.url}>
-                language: {data.language}
-              </SafeLink>
-            </Typography>
+            <SafeLink link url={data.url}>
+              language: {data.language}
+            </SafeLink>
           </Grid>
           <Grid item xs={6}>
             <Typography>stars: {data.stars}</Typography>
           </Grid>
         </Grid>
       </Paper>
+      {data.stars && <StarMagic stars={data.stars} />}
     </section>
   );
 }

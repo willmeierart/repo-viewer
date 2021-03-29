@@ -1,6 +1,7 @@
 // PACKAGES
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// UI
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Divider from "@material-ui/core/Divider";

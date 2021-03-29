@@ -2,11 +2,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 // UI
+import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 // REDUX
 import { toggleTheme } from "../redux/actions";
+
+export const useStyles = makeStyles((theme) => ({
+  toggle: {
+    cursor: "pointer",
+  },
+}));
 
 /**
  * @Component
@@ -14,6 +21,7 @@ import { toggleTheme } from "../redux/actions";
  *
  */
 const ThemeToggle = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const {
     ui: { darkTheme },
@@ -24,7 +32,11 @@ const ThemeToggle = () => {
   };
 
   return (
-    <Tooltip onClick={handleClick} title="toggle theme">
+    <Tooltip
+      className={classes.toggle}
+      onClick={handleClick}
+      title="toggle theme"
+    >
       {darkTheme ? <Brightness4Icon /> : <Brightness5Icon />}
     </Tooltip>
   );
